@@ -3,15 +3,39 @@
 }
 
 body {
-    background-color:lightslategrey;
+    background-color: white;
 }
 
 #container {
-    background-color: grey;
+    margin: 50px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    width: 50%;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-radius: 15px;
 }
 
 #output {
+    width: 80%;
     border: 1px solid white;
-    background-color: grey;
+    background-color: #ddd;
     padding: 10px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+h1, h2 {
+    padding: 0px;
+    text-align: center;
+}
+
+button {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #999;
+    border-radius: 5px;
 }
