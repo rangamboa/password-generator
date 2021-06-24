@@ -1,1 +1,17 @@
+* {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
 
+body {
+    background-color:lightslategrey;
+}
+
+#container {
+    background-color: grey;
+}
+
+#output {
+    border: 1px solid white;
+    background-color: grey;
+    padding: 10px;
+}
