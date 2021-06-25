@@ -5,6 +5,15 @@ var passLower;
 var passNum;
 var passSpec;
 var result;
+var bankUpper = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+var bankLower = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+var bankNum = ["1","2","3","4","5","6","7","8","9","0"];
+var bankSpec = ["!","@","#","$","%","&","*"]
+
+console.log(bankUpper);
+console.log(bankLower);
+console.log(bankNum);
+console.log(bankSpec);
 
     // WHEN I answer each prompt
     // THEN my input should be validated and at least one character type should be selected
@@ -29,8 +38,6 @@ document.getElementById("generate").addEventListener("click", function(event) {
 
     if (match == 1) charTypes();
     else console.log('User has terminated process.')
-
-    console.log('User has terminated process.')
 });
 
 function checkLength() {
@@ -54,7 +61,7 @@ function checkLength() {
 
     if (match == 1) console.log(passLength + ' meets length requirement.');
         else {
-            result = confirm('Response is invalid.\n- OK to restart\n- Cancel to quit');
+            result = confirm('Number is invalid.\n- OK to restart\n- Cancel to quit');
             console.log(passLength + ' fails length requirement.');
 
             // If the user clicks OK, the process begins again. Otherwise the function returns.
@@ -82,7 +89,7 @@ function charTypes () {
 
     if (passUpper === false && passLower === false && passNum === false && passSpec === false) {
        console.log('Need at least one character type.');
-       result = confirm('Need at least one character type.\n- OK to restart\n- Cancel to quit');
+       result = confirm('At least one character type is required.\n- OK to restart\n- Cancel to quit');
   
        // If the user clicks OK, the process begins again. Otherwise the function returns.
 
@@ -90,5 +97,5 @@ function charTypes () {
        else return;
     }
 
-    // keep going.
+    
 }
