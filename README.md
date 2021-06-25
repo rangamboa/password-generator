@@ -20,11 +20,10 @@ I used the following resources to build this application:
 
 ## Link to Deployed Github Page
 
-[Portfolio](https://rangamboa.github.io/portfolio/)
+[Portfolio](https://rangamboa.github.io/password-generator/)
 
-## Screenshots
+## Screenshot(s)
 
-![top](Images/screenshot01.jpg)
-![bottom](Images/screenshot02.jpg)
+![screenshot](Images/password-generator.png)
 - - -
 © 2021 Ran Gamboa
