@@ -17,18 +17,18 @@ var bankLower = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p"
 var bankNum = ["1","2","3","4","5","6","7","8","9","0"];
 var bankSpec = ["!","@","#","$","%","&","*"]
 
-console.log(bankUpper);
-console.log(bankLower);
-console.log(bankNum);
-console.log(bankSpec);
+// console.log(bankUpper);
+// console.log(bankLower);
+// console.log(bankNum);
+// console.log(bankSpec);
 
 // Listens for a button click.
 
 document.getElementById("generate").addEventListener("click", function(event) {
 
     event.preventDefault();
-
-    console.log('\nButton has been clicked.');
+    
+    console.log('\nGenerate button has been clicked.');
 
     // Calls functions to present a series of prompts for password criteria. Responses to prompts will be stored in variables for determining randomization of password.
 
@@ -42,7 +42,7 @@ document.getElementById("generate").addEventListener("click", function(event) {
 
 function checkLength() {
 
-    console.log('Length function has been called.');
+    console.log('Length selection function has been called.');
     
     // Reset password length in case user decided to start over.
 
@@ -77,12 +77,18 @@ function checkLength() {
 
 function charTypes () {
 
-    console.log('Types function has been called.');
+    console.log('Types selection function has been called.');
+
+    // Resetting variables.
+
     bank = [];
     passwordArray = [];
-    password = null;
+    password = "";
+    match = 0;
 
     // Character types may or may not include lowercase, uppercase, numeric, and/or special characters. Answers to these prompts only need to be true or false.
+
+    // The array of selected character types is then added to the overall "bank" array.
 
     passUpper = confirm('2. Do you want your password to contain uppercase characters?\n- OK for yes\n- Cancel for no');
 
@@ -112,6 +118,8 @@ function charTypes () {
         bank.push(bankSpec);
     }
 
+    match = 1;
+
     // Checks if at least one character type is selected.
 
     if (passUpper === false && passLower === false && passNum === false && passSpec === false) {
@@ -121,31 +129,30 @@ function charTypes () {
        // If the user clicks OK, the process begins again. Otherwise the function returns.
 
        if (result == true) charTypes();
-       else return;
+       else { match = 0; return; }
     }
 
-    // This section will randomly select characters from the selected arrays.
+    if (match == 1) {
 
-    console.log('Password length: ' + passLength);
-    console.log(bank, bank.length);
+        // This section will randomly select characters from the selected arrays.
 
-    // This loops as many times as the length of the password.
+        console.log('Password length: ' + passLength);
+        
+        // This loops as many times as the length of the password.
 
-    for (i = 0; i < passLength; i++) {
-        random1 = Math.floor(Math.random() * bank.length);
-        random2 = Math.floor(Math.random() * bank[random1].length);
+        for (i = 0; i < passLength; i++) {
+            random1 = Math.floor(Math.random() * bank.length);
+            random2 = Math.floor(Math.random() * bank[random1].length);
 
-        console.log("Character " + (i+1) + " of " + passLength + " is " + bank[random1][random2]);
+            console.log("Character " + (i+1) + "/" + passLength + ": " + bank[random1][random2]);
 
-        passwordArray.push(bank[random1][random2]);
-        // console.log(passwordArray);
-        password = passwordArray.join('');
-        console.log('Building password: ' + password);
-        // document.getElementById("output").setAttribute.textContent=password;
+            passwordArray.push(bank[random1][random2]);
+            // console.log(passwordArray);
+            password = passwordArray.join('');
+            console.log('Building password... ' + password);
+            // document.getElementById("output").setAttribute.textContent=password;
+        }
     }
 
-    // WHEN all prompts are answered
-    // THEN a password is generated that matches the selected criteria
-    // WHEN the password is generated
     // THEN the password is either displayed in an alert or written to the page
 }
