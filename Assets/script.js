@@ -1,3 +1,5 @@
+// Declaring variables.
+
 var match;
 var passLength;
 var passUpper;
@@ -5,6 +7,11 @@ var passLower;
 var passNum;
 var passSpec;
 var result;
+var random1;
+var random2;
+var passwordArray = [];
+var password;
+var bank = [];
 var bankUpper = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var bankLower = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 var bankNum = ["1","2","3","4","5","6","7","8","9","0"];
@@ -14,13 +21,6 @@ console.log(bankUpper);
 console.log(bankLower);
 console.log(bankNum);
 console.log(bankSpec);
-
-    // WHEN I answer each prompt
-    // THEN my input should be validated and at least one character type should be selected
-    // WHEN all prompts are answered
-    // THEN a password is generated that matches the selected criteria
-    // WHEN the password is generated
-    // THEN the password is either displayed in an alert or written to the page
 
 // Listens for a button click.
 
@@ -43,6 +43,10 @@ document.getElementById("generate").addEventListener("click", function(event) {
 function checkLength() {
 
     console.log('Length function has been called.');
+    
+    // Reset password length in case user decided to start over.
+
+    passLength = 0;
 
     // Length must be at least 8 characters and no more than 128 characters.
 
@@ -59,7 +63,7 @@ function checkLength() {
     }
     // Does the user's number meet the requirement?
 
-    if (match == 1) console.log(passLength + ' meets length requirement.');
+    if (match == 1) console.log(passLength + ' characters meets length requirement.');
         else {
             result = confirm('Number is invalid.\n- OK to restart\n- Cancel to quit');
             console.log(passLength + ' fails length requirement.');
@@ -74,18 +78,41 @@ function checkLength() {
 function charTypes () {
 
     console.log('Types function has been called.');
+    bank = [];
+    passwordArray = [];
+    password = null;
 
     // Character types may or may not include lowercase, uppercase, numeric, and/or special characters. Answers to these prompts only need to be true or false.
 
-    passUpper = confirm('1. Do you want your password to contain uppercase characters?\n- OK for yes\n- Cancel for no');
+    passUpper = confirm('2. Do you want your password to contain uppercase characters?\n- OK for yes\n- Cancel for no');
 
-    passLower = confirm('2. Do you want your password to contain lowercase characters?\n- OK for yes\n- Cancel for no');
+    if (passUpper === true) {
+        console.log('Password will contain uppercase characters.');
+        bank.push(bankUpper);
+    }
 
-    passNum = confirm('3. Do you want your password to contain numbers?\n- OK for yes\n- Cancel for no');
+    passLower = confirm('3. Do you want your password to contain lowercase characters?\n- OK for yes\n- Cancel for no');
 
-    passSpec = confirm('4. Do you want your password to contain special characters?\n- OK for yes\n- Cancel for no');
+    if (passLower === true) {
+        console.log('Password will contain lowercase characters.');
+        bank.push(bankLower);
+    }
 
-    console.log(passLength, passUpper, passLower, passNum, passSpec);
+    passNum = confirm('4. Do you want your password to contain numbers?\n- OK for yes\n- Cancel for no');
+
+    if (passNum === true) {
+        console.log('Password will contain numbers.');
+        bank.push(bankNum);
+    }
+
+    passSpec = confirm('5. Do you want your password to contain special characters?\n- OK for yes\n- Cancel for no');
+
+    if (passSpec === true) {
+        console.log('Password will contain special characters.');
+        bank.push(bankSpec);
+    }
+
+    // Checks if at least one character type is selected.
 
     if (passUpper === false && passLower === false && passNum === false && passSpec === false) {
        console.log('Need at least one character type.');
@@ -97,5 +124,28 @@ function charTypes () {
        else return;
     }
 
-    
+    // This section will randomly select characters from the selected arrays.
+
+    console.log('Password length: ' + passLength);
+    console.log(bank, bank.length);
+
+    // This loops as many times as the length of the password.
+
+    for (i = 0; i < passLength; i++) {
+        random1 = Math.floor(Math.random() * bank.length);
+        random2 = Math.floor(Math.random() * bank[random1].length);
+
+        console.log("Character " + (i+1) + " of " + passLength + " is " + bank[random1][random2]);
+
+        passwordArray.push(bank[random1][random2]);
+        // console.log(passwordArray);
+        password = passwordArray.join('');
+        console.log('Building password: ' + password);
+        // document.getElementById("output").setAttribute.textContent=password;
+    }
+
+    // WHEN all prompts are answered
+    // THEN a password is generated that matches the selected criteria
+    // WHEN the password is generated
+    // THEN the password is either displayed in an alert or written to the page
 }
