@@ -1,3 +1,10 @@
+var match;
+var passLength;
+var passUpper;
+var passLower;
+var passNum;
+var passSpec;
+
     // WHEN I answer each prompt
     // THEN my input should be validated and at least one character type should be selected
     // WHEN all prompts are answered
@@ -5,25 +12,58 @@
     // WHEN the password is generated
     // THEN the password is either displayed in an alert or written to the page
 
-// Click the button to generate a password.
+// Listens for a button click.
 
 document.getElementById("generate").addEventListener("click", function(event) {
-    event.preventDefault();
-    console.log('button has been clicked.');
 
-    // Present a series of prompts for password criteria.
+    event.preventDefault();
+
+    console.log('\nButton has been clicked.');
+
+    // Calls functions to present a series of prompts for password criteria. Responses to prompts will be stored in variables for determining randomization of password.
+
+    checkLength();
+    charTypes();
+});
+
+function checkLength() {
+
+    console.log('Length function has been called.');
 
     // Length must be at least 8 characters and no more than 128 characters.
 
-    var passLength = prompt('1. How long do you want your password to be?\n- Minimum 8 characters\n- Maximum 128 characters');
+    passLength = prompt('1. How long do you want your password to be?\n- Minimum 8 characters\n- Maximum 128 characters');
 
-    // Character types may or may not include lowercase, uppercase, numeric, and/or special characters.
+    // Reset criteria checker.
 
-    var passUpper = confirm('1. How long do you want your password to be?\n- Minimum 8 characters\n- Maximum 128 characters');
+    match = 0;
 
-    var passLower = confirm('1. How long do you want your password to be?\n- Minimum 8 characters\n- Maximum 128 characters');
+    // This cycles through all permitted password lengths (8-128 characters).
 
-    var passNum = confirm('1. How long do you want your password to be?\n- Minimum 8 characters\n- Maximum 128 characters');
+    for (let i = 8; i < 129; i++) {
+        if (passLength == i) match = 1;            
+    }
 
-    var passSpec = confirm('1. How long do you want your password to be?\n- Minimum 8 characters\n- Maximum 128 characters');
-});
+    if (match == 1) console.log(passLength + ' meets length requirement.');
+        else {
+            confirm('Please type number between 8 and 128.\nOK to continue')
+            console.log(passLength + ' fails length requirement.');
+        }
+}
+
+function charTypes () {
+
+    console.log('Types function has been called.');
+
+    // Character types may or may not include lowercase, uppercase, numeric, and/or special characters. Answers to these prompts only need to be true or false.
+
+    passUpper = confirm('1. Do you want your password to contain uppercase characters?\n- OK for yes\n- Cancel for no');
+
+    passLower = confirm('2. Do you want your password to contain lowercase characters?\n- OK for yes\n- Cancel for no');
+
+    passNum = confirm('3. Do you want your password to contain numbers?\n- OK for yes\n- Cancel for no');
+
+    passSpec = confirm('4. Do you want your password to contain special characters?\n- OK for yes\n- Cancel for no');
+
+    console.log(passLength, passUpper, passLower, passNum, passSpec);
+}
