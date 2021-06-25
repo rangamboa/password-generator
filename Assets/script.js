@@ -4,6 +4,7 @@ var passUpper;
 var passLower;
 var passNum;
 var passSpec;
+var result;
 
     // WHEN I answer each prompt
     // THEN my input should be validated and at least one character type should be selected
@@ -23,7 +24,13 @@ document.getElementById("generate").addEventListener("click", function(event) {
     // Calls functions to present a series of prompts for password criteria. Responses to prompts will be stored in variables for determining randomization of password.
 
     checkLength();
-    charTypes();
+
+    // If the character length requirement has been satisfied, the character types function is called. Otherwise, no function are called and the process ends.
+
+    if (match == 1) charTypes();
+    else console.log('User has terminated process.')
+
+    console.log('User has terminated process.')
 });
 
 function checkLength() {
@@ -41,13 +48,19 @@ function checkLength() {
     // This cycles through all permitted password lengths (8-128 characters).
 
     for (let i = 8; i < 129; i++) {
-        if (passLength == i) match = 1;            
+        if (passLength == i) match = 1; // The user's number meets the requirement.            
     }
+    // Does the user's number meet the requirement?
 
     if (match == 1) console.log(passLength + ' meets length requirement.');
         else {
-            confirm('Please type number between 8 and 128.\nOK to continue')
+            result = confirm('Response is invalid.\n- OK to restart\n- Cancel to quit');
             console.log(passLength + ' fails length requirement.');
+
+            // If the user clicks OK, the process begins again. Otherwise the function returns.
+
+            if (result == true) checkLength();
+            else return;
         }
 }
 
@@ -66,4 +79,16 @@ function charTypes () {
     passSpec = confirm('4. Do you want your password to contain special characters?\n- OK for yes\n- Cancel for no');
 
     console.log(passLength, passUpper, passLower, passNum, passSpec);
+
+    if (passUpper === false && passLower === false && passNum === false && passSpec === false) {
+       console.log('Need at least one character type.');
+       result = confirm('Need at least one character type.\n- OK to restart\n- Cancel to quit');
+  
+       // If the user clicks OK, the process begins again. Otherwise the function returns.
+
+       if (result == true) charTypes();
+       else return;
+    }
+
+    // keep going.
 }
