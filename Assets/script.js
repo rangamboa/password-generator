@@ -11,24 +11,22 @@ var random1;
 var random2;
 var passwordArray = [];
 var password;
+var passwordOutput = document.getElementById("output");
 var bank = [];
 var bankUpper = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var bankLower = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 var bankNum = ["1","2","3","4","5","6","7","8","9","0"];
 var bankSpec = ["!","@","#","$","%","&","*"]
 
-// console.log(bankUpper);
-// console.log(bankLower);
-// console.log(bankNum);
-// console.log(bankSpec);
-
 // Listens for a button click.
 
 document.getElementById("generate").addEventListener("click", function(event) {
 
     event.preventDefault();
-    
+
     console.log('\nGenerate button has been clicked.');
+
+    passwordOutput.textContent = "";
 
     // Calls functions to present a series of prompts for password criteria. Responses to prompts will be stored in variables for determining randomization of password.
 
@@ -147,12 +145,12 @@ function charTypes () {
             console.log("Character " + (i+1) + "/" + passLength + ": " + bank[random1][random2]);
 
             passwordArray.push(bank[random1][random2]);
-            // console.log(passwordArray);
+
             password = passwordArray.join('');
             console.log('Building password... ' + password);
-            // document.getElementById("output").setAttribute.textContent=password;
         }
     }
 
-    // THEN the password is either displayed in an alert or written to the page
+    // The password is written to the page.
+    passwordOutput.textContent = password;
 }
